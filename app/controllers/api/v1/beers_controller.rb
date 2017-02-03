@@ -1,3 +1,4 @@
+require 'pry'
 module Api::V1
 
   class BeersController < ApplicationController
@@ -10,6 +11,14 @@ module Api::V1
       @beer = Beer.find(params[:id])
       render json: @beer
     end
+
+    def alcohol
+      binding.pry
+      @beers = Beer.all.where('alcohol <= ?', (params[:upper].to_f / 10).to_s)
+      render json: @beers
+    end
+
+
   end
 
 end

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   scope module: 'api' do  # lets use route to contollers without explicity including it in the url
     namespace :v1  do
+      get '/beers/alcohol/:upper' => 'beers#alcohol'
       resources :beers
     end
   end

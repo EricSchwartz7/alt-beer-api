@@ -7,3 +7,22 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'faker'
+
+beerlist = []
+
+
+50.times do |x|
+
+  name = Faker::Beer.name
+  style = Faker::Beer.style
+  ibu = Faker::Beer.ibu[0..-5].to_i
+  alcohol = Faker::Beer.alcohol[0...-1].to_f
+
+  beerlist << [name, style, ibu, alcohol]
+
+end
+
+beerlist.each do |name, style, ibu, alcohol|
+  style = Style.find_or_create_by(name: style)
+  beer = Beer.create(name: name, style_id: style.id, ibu: ibu, alcohol: alcohol)
+end
